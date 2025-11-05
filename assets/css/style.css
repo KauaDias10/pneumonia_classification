@@ -10,12 +10,13 @@
     --dark-gray: #2c3e50;
     --gray-text: #5f6c7b;
     --bg-sidebar: #0b1a2a;
+    color-scheme: light !important;
 }
 
 /* --- Global --- */
 html, body, .stApp {
     font-family: 'Montserrat', sans-serif;
-    background-color: var(--light-blue);
+    background-color: var(--light-blue) !important;
     color: var(--dark-gray);
 }
 
@@ -107,19 +108,24 @@ section[data-testid="stSidebar"] .stRadio > label {
 
 /* --- Footer --- */
 .main-footer {
+    margin-top:70px;
+    margin-bottom:-150px;
     background-color: #f2f4f8;
     border-radius: 0;
     padding: 1rem 0;
+    padding-top:20px;
     text-align: center;
-    border-top: 3px solid var(--primary-blue);
+    border-top: 2px solid var(--primary-blue);
     font-size: 0.9rem;
     color: var(--gray-text);
-    position: fixed;
+    position: relative;
     bottom: 0;
     left: 0;
-    width: 100%;
+    width: calc(100% + 10rem); 
+    margin-left: -5rem;        
     z-index: 100;
 }
+
 
 /* --- Responsivo --- */
 @media (max-width: 768px) {

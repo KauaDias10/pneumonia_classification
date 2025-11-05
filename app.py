@@ -20,6 +20,7 @@ def load_css():
     try:
         with open("assets/css/style.css") as f:
             st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+            
     except FileNotFoundError:
         # CSS fallback básico
         st.warning("⚠️ CSS externo não encontrado. Nenhum estilo será aplicado.")
@@ -33,19 +34,19 @@ def sidebar():
         # Menu de navegação simplificado usando radio buttons
         page = st.radio(
             "Navegação",
-            ["🏠 Classificação", "ℹ️ Sobre o Modelo"],
+            ["Classificação", "Sobre o Modelo"],
             index=0
         )
         
         st.markdown("---")
         
         # Informações do modelo na sidebar
-        st.subheader("📋 Especificações")
+        st.subheader("Especificações")
         st.markdown("""
         **Arquitetura:** MobileNetV2  
         **Dataset:** Chest X-Ray Images  
         **Classes:** Normal vs Pneumonia  
-        **Acurácia:** 92% (validação)  
+        **Acurácia:** 86,70% (validação)  
         **Especialidade:** Radiologia Torácica
         """)
         
@@ -57,7 +58,7 @@ def sidebar():
 def carrega_imagem():
     
     uploaded_file = st.file_uploader(
-        '**🩺 Envie uma radiografia de tórax:**',
+        '**Envie uma radiografia de tórax:**',
         type=['png', 'jpg', 'jpeg'],
         help="Formatos suportados: PNG, JPG, JPEG"
     )
@@ -190,90 +191,101 @@ def pagina_classificacao():
 
 # --- 🔹 Página Sobre ---
 def pagina_sobre():
-    st.title("ℹ️ Sobre o Modelo")
+    st.title("Sobre o Projeto")
     st.markdown("---")
 
-    col1, col2 = st.columns([2, 1])
+    # --- Introdução ---
+    with st.container():
+        st.markdown("""
+        <div class='intro-section'>
+        <h3>Desenvolvimento e Finalidade</h3>
+        <p>O <strong>PneumoScan</strong> foi desenvolvido por <strong>Kauã Christian</strong> como parte de um 
+        Trabalho de Conclusão de Curso (TCC), com o objetivo de aplicar técnicas de 
+        Inteligência Artificial e aprendizado profundo no auxílio ao diagnóstico médico
+        de pneumonia através da análise automatizada de radiografias de tórax.</p>
+
+        <p>O sistema busca apoiar profissionais da saúde em processos de triagem e análise inicial de exames, 
+        fornecendo previsões com base em redes neurais convolucionais treinadas em imagens reais.</p>
+
+        <p>Apesar de apresentar resultados expressivos, este projeto possui caráter <strong>educacional e experimental</strong>, 
+        e não substitui a avaliação médica profissional. As previsões geradas devem ser interpretadas com responsabilidade 
+        e sempre em conjunto com parecer clínico.</p>
+
+        <h4>Uso Recomendado</h4>
+        <ul style='text-align: left; display: inline-block;'>
+            <li>Triagem inicial de radiografias torácicas</li>
+            <li>Ambientes de ensino e pesquisa</li>
+            <li>Estudos sobre aplicações de IA na saúde</li>
+            <li>Monitoramento de progresso em tratamentos</li>
+        </ul>
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.markdown("---")
+
+    # --- Colunas com detalhes técnicos ---
+    col1, col2 = st.columns(2)
+
     with col1:
-        st.header("📋 Especificações Técnicas")
-        
-        st.subheader("🎯 Arquitetura do Modelo")
+        st.header("Métricas de Performance")
         st.markdown("""
-        - **Base Model:** MobileNetV2
-        - **Input Shape:** 224x224x3
-        - **Output:** Sigmoid (Classificação Binária)
-        - **Parâmetros:** 2.3 milhões
-        - **Camadas:** 155
+        - **Acurácia:** 92.3%  
+        - **Precisão:** 91.8%  
+        - **Recall:** 89.5%  
+        - **F1-Score:** 90.6%  
+        - **AUC-ROC:** 0.96  
         """)
-        
-        st.subheader("📊 Métricas de Performance")
-        st.markdown("""
-        - **Acurácia:** 92.3%
-        - **Precisão:** 91.8%
-        - **Recall:** 89.5%
-        - **F1-Score:** 90.6%
-        - **AUC-ROC:** 0.96
-        """)
-        
-        st.subheader("🎓 Treinamento")
-        st.markdown("""
-        - **Dataset:** Chest X-Ray Images (Pneumonia)
-        - **Amostras:** 5,856 imagens
-        - **Split:** 80% treino, 10% validação, 10% teste
-        - **Épocas:** 50
-        - **Batch Size:** 32
-        - **Optimizer:** Adam
-        - **Loss Function:** Binary Crossentropy
-        """)
+
 
     with col2:
-        st.header("🛠️ Stack Tecnológico")
-        
-        tech_stack = {
-            "Framework": "TensorFlow 2.0",
-            "Backend": "Streamlit",
-            "Processamento": "NumPy, PIL",
-            "Visualização": "Plotly, Pandas",
-            "Interface": "CSS Personalizado"
-        }
-        
-        for tech, desc in tech_stack.items():
-            st.markdown(f"**{tech}:** {desc}")
+        st.header("Treinamento")
+        st.markdown("""
+        - **Dataset:** Chest X-Ray Images (Pneumonia)  
+        - **Total de Imagens:** 5.856  
+        - **Divisão:** 80% treino, 10% validação, 10% teste  
+        - **Épocas:** 50  
+        - **Batch Size:** 32  
+        - **Optimizer:** Adam  
+        - **Função de Perda:** Binary Crossentropy  
+        """)
 
     st.markdown("---")
 
-    st.header("📝 Considerações Éticas")
-    st.warning("""
-    **⚠️ Importante:**
-    - Este sistema é uma ferramenta de auxílio diagnóstico
-    - Não substitui a avaliação de um médico especialista
-    - Resultados devem ser interpretados por profissionais qualificados
-    - Falsos positivos e negativos podem ocorrer
-    - Sempre realize exames complementares quando necessário
-    """)
+    # --- Encerramento e perspectivas ---
+    with st.container():
+        st.markdown("""
+        <div class='intro-section'>
+        <h3>📈 Conclusões e Possíveis Melhorias</h3>
+        <p>O projeto demonstrou um desempenho satisfatório, alcançando boas métricas de predição e 
+        validando a eficiência da arquitetura MobileNetV2 em aplicações médicas de visão computacional.</p>
 
-    st.info("""
-    **💡 Uso Recomendado:**
-    - Triagem inicial de radiografias
-    - Segundo parecer em diagnósticos
-    - Ambiente educacional e de pesquisa
-    - Monitoramento de tratamento
-    """)
+        <p>Como perspectivas futuras, o sistema poderá ser aprimorado com:</p>
+        <ul style='text-align: left; display: inline-block;'>
+            <li>Expansão do dataset com mais imagens de diferentes origens;</li>
+            <li>Incremento da acurácia por meio de técnicas de fine-tuning e aumento de dados;</li>
+            <li>Treinamento para detecção de outras doenças pulmonares, como COVID-19, tuberculose e enfisema;</li>
+            <li>Otimização para execução em dispositivos móveis e ambientes clínicos reais.</li>
+        </ul>
+
+        <p>Este estudo reforça o potencial da Inteligência Artificial como ferramenta de apoio 
+        no diagnóstico por imagem, contribuindo para o avanço da saúde digital e da pesquisa aplicada.</p>
+        </div>
+        """, unsafe_allow_html=True)
+
 
 def main():
     # Sidebar e navegação
     page = sidebar()
     
     # Renderiza a página selecionada
-    if page == "🏠 Classificação":
+    if page == "Classificação":
         pagina_classificacao()
-    else:  # "ℹ️ Sobre o Modelo"
+    else:  # "Sobre o Modelo"
         pagina_sobre()
     
     # Footer principal (apenas na página principal)
-    if page == "🏠 Classificação":
-        st.markdown("---")
-        st.markdown("""
+    st.markdown("---")
+    st.markdown("""
         <div class='main-footer'>
             <p><strong>PneumoScan</strong> - Sistema de Auxílio ao Diagnóstico por Imagem</p>
             <p style='font-size: 0.8em; color: #666;'>
