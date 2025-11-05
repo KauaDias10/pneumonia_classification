@@ -1,0 +1,148 @@
+/* --- Fonte Montserrat --- */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+/* --- Variáveis globais --- */
+:root {
+    --primary-blue: #0b5fa7;
+    --secondary-blue: #1e88e5;
+    --light-blue: #f6f9fc;
+    --white: #ffffff;
+    --dark-gray: #2c3e50;
+    --gray-text: #5f6c7b;
+    --bg-sidebar: #0b1a2a;
+}
+
+/* --- Global --- */
+html, body, .stApp {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--light-blue);
+    color: var(--dark-gray);
+}
+
+/* --- Sidebar --- */
+section[data-testid="stSidebar"] {
+    background-color: var(--bg-sidebar) !important;
+    color: #fff !important;
+    padding-top: 2rem !important;
+}
+
+section[data-testid="stSidebar"] .block-container {
+    padding: 2rem 1rem !important;
+}
+
+section[data-testid="stSidebar"] h1, 
+section[data-testid="stSidebar"] h2,
+section[data-testid="stSidebar"] h3,
+section[data-testid="stSidebar"] p,
+section[data-testid="stSidebar"] label {
+    color: #fff !important;
+}
+
+section[data-testid="stSidebar"] .stRadio > label {
+    color: #d0d8e0;
+}
+
+/* --- Cabeçalho principal --- */
+.main-header {
+    text-align: center;
+    padding: 2rem 0 1rem 0;
+    color: var(--dark-gray);
+}
+
+/* --- Seção de introdução --- */
+.intro-section {
+    background-color: var(--white);
+    padding: 1.8rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.20);
+    margin-bottom: 2rem;
+    text-align: center;
+    font-size: 1.05rem;
+    color: var(--gray-text);
+}
+.intro-section strong {
+    color: var(--primary-blue);
+}
+
+/* --- File Uploader --- */
+.stFileUploader {
+    border: 2px dashed var(--secondary-blue);
+    border-radius: 12px;
+    background-color: var(--white);
+    padding: 1.8rem;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.stFileUploader:hover {
+    border-color: var(--primary-blue);
+}
+
+/* --- Botões --- */
+.stButton > button {
+    background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 0.7rem 1.5rem;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+.stButton > button:hover {
+    background: linear-gradient(135deg, var(--secondary-blue), var(--primary-blue));
+}
+
+/* --- Cards de resultado --- */
+.result-card {
+    background-color: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    padding: 2rem;
+    text-align: center;
+    transition: 0.3s ease;
+    border: 1px solid #edf1f4;
+}
+.result-card:hover {
+    transform: scale(1.02);
+}
+
+/* --- Footer --- */
+.main-footer {
+    background-color: #f2f4f8;
+    border-radius: 0;
+    padding: 1rem 0;
+    text-align: center;
+    border-top: 3px solid var(--primary-blue);
+    font-size: 0.9rem;
+    color: var(--gray-text);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+}
+
+/* --- Responsivo --- */
+@media (max-width: 768px) {
+    .intro-section {
+        font-size: 0.95rem;
+        padding: 1rem;
+    }
+    .result-card {
+        padding: 1rem;
+    }
+}
+/* Adicione isso no seu arquivo style.css */
+.uploadedFile {
+    text-align: center;
+}
+
+.stFileUploader > div > div {
+    border: 2px dashed #1e88e5;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+}
+
+.stFileUploader > div > div:hover {
+    border-color: #0b1a2a;
+}
