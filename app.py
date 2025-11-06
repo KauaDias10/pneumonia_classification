@@ -91,7 +91,7 @@ def carrega_imagem():
 
     return None, None
 
-# --- 🔹 Função para carregar modelo ---
+# --- Função para carregar modelo ---
 @st.cache_resource
 def carrega_modelo_h5():
     try:
@@ -102,7 +102,7 @@ def carrega_modelo_h5():
         st.sidebar.error(f"Erro ao carregar modelo: {str(e)}")
         return None
 
-# --- 🔹 Função de previsão ---
+# --- Função de previsão ---
 def previsao_h5(_model, image, filename):
     # Container para resultados
     result_container = st.container()
@@ -191,7 +191,7 @@ def pagina_classificacao():
 
 # --- 🔹 Página Sobre ---
 def pagina_sobre():
-    st.title("Sobre o Projeto")
+    st.title("Sobre o Modelo")
     st.markdown("---")
 
     # --- Introdução ---
@@ -229,11 +229,11 @@ def pagina_sobre():
     with col1:
         st.header("Métricas de Performance")
         st.markdown("""
-        - **Acurácia:** 92.3%  
-        - **Precisão:** 91.8%  
-        - **Recall:** 89.5%  
-        - **F1-Score:** 90.6%  
-        - **AUC-ROC:** 0.96  
+        - **Acurácia:** 86,70%  
+        - **Precisão:** NORMAL: 89% | PNEUMONIA: 92%  
+        - **Recall:** NORMAL: 86% | PNEUMONIA: 94%  
+        - **F1-Score:** NORMAL: 88% | PNEUMONIA: 93%  
+        - **AUC-ROC:** 0.9665  
         """)
 
 
@@ -242,8 +242,8 @@ def pagina_sobre():
         st.markdown("""
         - **Dataset:** Chest X-Ray Images (Pneumonia)  
         - **Total de Imagens:** 5.856  
-        - **Divisão:** 80% treino, 10% validação, 10% teste  
-        - **Épocas:** 50  
+        - **Divisão:** 80% treino, 10% teste, 5% validação  
+        - **Épocas:** 50 + (EarlyStoping) 
         - **Batch Size:** 32  
         - **Optimizer:** Adam  
         - **Função de Perda:** Binary Crossentropy  
@@ -255,7 +255,7 @@ def pagina_sobre():
     with st.container():
         st.markdown("""
         <div class='intro-section'>
-        <h3>📈 Conclusões e Possíveis Melhorias</h3>
+        <h3>Conclusões e Possíveis Melhorias</h3>
         <p>O projeto demonstrou um desempenho satisfatório, alcançando boas métricas de predição e 
         validando a eficiência da arquitetura MobileNetV2 em aplicações médicas de visão computacional.</p>
 

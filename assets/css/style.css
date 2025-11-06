@@ -126,6 +126,9 @@ section[data-testid="stSidebar"] .stRadio > label {
     z-index: 100;
 }
 
+.st.Image caption{
+    color:#1e88e5;
+}
 
 /* --- Responsivo --- */
 @media (max-width: 768px) {
