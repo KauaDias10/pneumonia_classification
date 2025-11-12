@@ -23,15 +23,14 @@ def load_css():
             
     except FileNotFoundError:
         # CSS fallback básico
-        st.warning("⚠️ CSS externo não encontrado. Nenhum estilo será aplicado.")
+        st.warning("CSS externo não encontrado.")
 load_css()
 
-# --- Menu Lateral ---
+#SIDE BAR
 def sidebar():
     with st.sidebar:
         st.title("PneumoScan")
         
-        # Menu de navegação simplificado usando radio buttons
         page = st.radio(
             "Navegação",
             ["Classificação", "Sobre o Modelo"],
@@ -40,7 +39,7 @@ def sidebar():
         
         st.markdown("---")
         
-        # Informações do modelo na sidebar
+        # Infos sidebar
         st.subheader("Especificações")
         st.markdown("""
         **Arquitetura:** MobileNetV2  
@@ -54,7 +53,7 @@ def sidebar():
         
         return page
 
-# --- 🔹 Função para carregar imagem ---
+#Função para carregar imagem
 def carrega_imagem():
     
     uploaded_file = st.file_uploader(
@@ -69,7 +68,6 @@ def carrega_imagem():
             image = Image.open(io.BytesIO(image_data))
             image = image.convert("RGB")
 
-            # Centralizar a imagem usando columns
             col1, col2, col3 = st.columns([1, 2, 1])
             with col2:  # Coluna do meio para centralizar
                 st.image(image, caption='Imagem carregada com sucesso!', use_container_width=True)
@@ -91,7 +89,7 @@ def carrega_imagem():
 
     return None, None
 
-# --- Função para carregar modelo ---
+#Função para carregar modelo
 @st.cache_resource
 def carrega_modelo_h5():
     try:
@@ -102,7 +100,7 @@ def carrega_modelo_h5():
         st.sidebar.error(f"Erro ao carregar modelo: {str(e)}")
         return None
 
-# --- Função de previsão ---
+#Função de previsão
 def previsao_h5(_model, image, filename):
     # Container para resultados
     result_container = st.container()
@@ -111,7 +109,7 @@ def previsao_h5(_model, image, filename):
         st.subheader("Resultados da Análise")
         
         # Faz a previsão
-        with st.spinner('🔍 Analisando radiografia...'):
+        with st.spinner('Analisando radiografia...'):
             pred = _model.predict(image, verbose=0)
             prob_pneumonia = float(pred[0][0])
             prob_normal = 1 - prob_pneumonia
@@ -157,7 +155,7 @@ def previsao_h5(_model, image, filename):
             fig.update_layout(showlegend=False)
             st.plotly_chart(fig, use_container_width=True)
 
-        # Informações técnicas
+        # Infos Técnicas
         with st.expander("📋 Detalhes Técnicos"):
             st.write(f"**Arquivo analisado:** {filename}")
             st.write(f"**Dimensões da imagem:** 224x224 pixels")
@@ -165,7 +163,7 @@ def previsao_h5(_model, image, filename):
             st.write(f"**Probabilidade Pneumonia:** {prob_pneumonia:.4f}")
             st.write(f"**Probabilidade Normal:** {prob_normal:.4f}")
 
-# --- 🔹 Página de Classificação ---
+#Página de Classificação
 def pagina_classificacao():
 
     with st.container():
@@ -189,7 +187,7 @@ def pagina_classificacao():
         if model is not None:
             previsao_h5(model, image_array, filename)
 
-# --- 🔹 Página Sobre ---
+#Página Sobre
 def pagina_sobre():
     st.title("Sobre o Modelo")
     st.markdown("---")
@@ -223,7 +221,7 @@ def pagina_sobre():
 
     st.markdown("---")
 
-    # --- Colunas com detalhes técnicos ---
+    #detalhes técnicos
     col1, col2 = st.columns(2)
 
     with col1:
@@ -251,7 +249,7 @@ def pagina_sobre():
 
     st.markdown("---")
 
-    # --- Encerramento e perspectivas ---
+    #Encerramento
     with st.container():
         st.markdown("""
         <div class='intro-section'>
@@ -272,9 +270,8 @@ def pagina_sobre():
         </div>
         """, unsafe_allow_html=True)
 
-
+#chamando funções das paginas, sidebar e footer
 def main():
-    # Sidebar e navegação
     page = sidebar()
     
     # Renderiza a página selecionada
